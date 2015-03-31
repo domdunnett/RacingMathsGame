@@ -6,6 +6,9 @@ $(document).ready(function(){
 	var userAnswer;
 	var randomAnswer;
 	var secondsRemaining = 10;
+	var userChoice;
+	var compChoice;
+	var vehicleArray = ["car-1", "car-2"];
 
 	function createRandomQuestion() {
 
@@ -20,9 +23,22 @@ $(document).ready(function(){
 
 	}
 
+	function selectVehicles() {
+		$(document).one('click', '.vehicle', function() {
+			userChoice = $(this).attr('id');
+			for (var i = 0; i < vehicleArray.length; i++) {
+				if (vehicleArray[i] === userChoice) {
+					vehicleArray.splice(i,1);
+				}
+			};
+			compChoice = vehicleArray[Math.ceil(Math.random()*vehicleArray.length)]
+		});
+	}
+
 	function startTimer() {
 	
 		var timer = setInterval(functionEverySecond, 1000);
+		var compTimer = setInterval(driveComputer, 2000)
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
@@ -33,12 +49,12 @@ $(document).ready(function(){
 			addSeconds();
 			$('#user-input').val('');
 			$('#user-input').parent().removeClass('has-error');
-			$('#car-1').animate({ "left": "+=50px" }, "slow" );
+			$('#car-' + userChoice).animate({ "left": "+=50px" }, "slow" );
 			createRandomQuestion();
 		}
 		else {
 			$('#user-input').parent().addClass('has-error');
-			$('#car-1').animate({ "left": "-=10px" }, "slow" );
+			$('#car-' + userChoice).animate({ "left": "-=10px" }, "slow" );
 		}
 	}
 
@@ -56,7 +72,11 @@ $(document).ready(function(){
     }
   }
 
+  function driveComputer() {
+  	$('#car-' + compChoice).animate({ "left": "+=50px" }, "slow" );
+  }
 
+  selectVehicles();
 	createRandomQuestion();
 
 	$('#play').click(function() {

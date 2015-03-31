@@ -9,6 +9,14 @@ img {
 	position: relative;
 }
 
+img:hover {
+	opacity: 0.5;
+}
+
+#info {
+	font-size: 10px;
+}
+
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
