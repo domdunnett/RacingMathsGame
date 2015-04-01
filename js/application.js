@@ -1,16 +1,24 @@
 $(document).ready(function(){
 	
-	var number1;
-	var number2;
-	var randomQuestion;
 	var userAnswer;
 	var randomAnswer;
-	var secondsRemaining = 10;
 	var userChoice;
 	var compChoice;
-	var vehicleArray = ["car-1", "car-2"];
+	
+	var race = {
+		secondsRemaining: 10,
+		vehicles: ["vehicle-1", "vehicle-2", "vehicle-3", "vehicle-4"],
+		moveUserCarForward: function() {$('#' + userChoice).animate({ "left": "+=50px" }, "slow" );},
+		moveUserCarBackward: function() {$('#' + userChoice).animate({ "left": "-=50px" }, "slow" );},
+		moveCompCarForward: function() {$('#' + compChoice).animate({ "left": "+=50px" }, "slow" );},
+		moveCompCarBackward: function() {$('#' + compChoice).animate({ "left": "-=50px" }, "slow" );}
+	}
 
 	function createRandomQuestion() {
+	
+		var randomQuestion;
+		var number1;
+		var number2;
 
 		number1 = Math.ceil(Math.random()*10);
 		
@@ -23,22 +31,20 @@ $(document).ready(function(){
 
 	}
 
-	function selectVehicles() {
-		$(document).one('click', '.vehicle', function() {
-			userChoice = $(this).attr('id');
-			for (var i = 0; i < vehicleArray.length; i++) {
-				if (vehicleArray[i] === userChoice) {
-					vehicleArray.splice(i,1);
-				}
-			};
-			compChoice = vehicleArray[Math.ceil(Math.random()*vehicleArray.length)]
-		});
+	
+	function selectVehicles(userChoice) {
+		for (var i = 0; i < race.vehicles.length; i++) {
+			if (race.vehicles[i] === userChoice) {
+				race.vehicles.splice(i,1);
+			}
+		};
+		compChoice = race.vehicles[Math.ceil(Math.random()*race.vehicles.length)]
 	}
 
 	function startTimer() {
 	
 		var timer = setInterval(functionEverySecond, 1000);
-		var compTimer = setInterval(driveComputer, 2000)
+		var compTimer = setInterval(race.moveCompCarForward, 2000)
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
@@ -49,34 +55,33 @@ $(document).ready(function(){
 			addSeconds();
 			$('#user-input').val('');
 			$('#user-input').parent().removeClass('has-error');
-			$('#car-' + userChoice).animate({ "left": "+=50px" }, "slow" );
+			race.moveUserCarForward();
 			createRandomQuestion();
 		}
 		else {
 			$('#user-input').parent().addClass('has-error');
-			$('#car-' + userChoice).animate({ "left": "-=10px" }, "slow" );
 		}
 	}
 
   function addSeconds() {
-    secondsRemaining += 2;
+    race.secondsRemaining += 2;
   }
 
   function functionEverySecond() {
-    if (secondsRemaining < 0) {
+    if (race.secondsRemaining < 0) {
       
       clearInterval(timer);
     } else {
-      $('#timer').text(secondsRemaining);
-      secondsRemaining--;
+      $('#timer').text(race.secondsRemaining);
+      race.secondsRemaining--;
     }
   }
 
-  function driveComputer() {
-  	$('#car-' + compChoice).animate({ "left": "+=50px" }, "slow" );
-  }
+	$(document).one('click', '.vehicle', function() {
+	  userChoice = $(this).attr('id');
+	  selectVehicles(userChoice);
+	});
 
-  selectVehicles();
 	createRandomQuestion();
 
 	$('#play').click(function() {
@@ -85,7 +90,7 @@ $(document).ready(function(){
 		$('#user-input').removeAttr('placeholder');
 		$('#user-input').focus();
 	});
-	
+
 	$(document).one('focus', '#user-input', function() {
 		startTimer();
 	});
