@@ -18,6 +18,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
+    <link rel="stylesheet" href="css/animate.css">
+
     <link href="css/custom.css" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
@@ -31,16 +33,18 @@
         <h1>Race the Computer!</h1>
         <p><a id="play" class="btn btn-success btn-lg" role="button">Race!</a></p>
         <p id="info">Choose your vehicle (Be careful, they have different properties!)</p>
-        <img class="vehicle" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
-        <img class="vehicle" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
-        <img class="vehicle" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
-        <img class="vehicle" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
+        <div class="track">
+          <img class="vehicle" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
+          <img class="vehicle" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
+          <img class="vehicle" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
+          <img class="vehicle" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
+        </div>
       </div>
 
-      <h1 class="col-sm-4 col-sm-offset-4 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"> 10</span></h1>
+      <h1 class="col-sm-4 col-sm-offset-4 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"></span></h1>
       <h1 id="question" class="col-sm-4 col-sm-offset-4 text-center"></h1>
       <div class="col-sm-2 col-sm-offset-5 form-group">
-        <input id="user-input" type="text" placeholder="Click Play to Start..." disabled class="form-control">
+        <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled class="form-control">
       </div>
     </div>
 

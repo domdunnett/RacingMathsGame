@@ -7,14 +7,25 @@ img {
 	height: 50px;
 	display: block;
 	position: relative;
+	opacity: 0.5;
+    left: 0px;
 }
 
 img:hover {
-	opacity: 0.5;
+    opacity: 1;
+}
+
+.selected {
+    opacity: 1;
 }
 
 #info {
 	font-size: 10px;
+}
+
+.track {
+    background: grey;
+    width: 200px;
 }
 
 .glyphicon-spin {
