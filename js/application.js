@@ -48,14 +48,22 @@ $(document).ready(function(){
 				race.vehicles.splice(i,1);
 			}
 		};
-		compChoice = race.vehicles[Math.ceil(Math.random()*race.vehicles.length)]
 	}
+	
+	function driveComputerCars() {
+		
+		compChoice = race.vehicles[Math.floor(Math.random()*race.vehicles.length)];
+		race.moveCompCarForward();
+
+	}
+
 
 	function startTimer() {
 	
 		timer = setInterval(functionEverySecond, 1000);
 		compTimer = setInterval(race.moveCompCarForward, 2000);
-		go = setInterval(whoHasFinished, 500);
+		userGo = setInterval(whoHasFinished, 500);
+		compGo = setInterval(driveComputerCars, 300)
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
@@ -80,8 +88,8 @@ $(document).ready(function(){
 
   function functionEverySecond() {
     if (race.secondsRemaining < 0) {
-      
       clearInterval(timer);
+      checkeredFlag();
     } else {
       $('#timer').text(race.secondsRemaining);
       race.secondsRemaining--;
@@ -111,7 +119,8 @@ $(document).ready(function(){
   function checkeredFlag() {
 		clearInterval(timer);
 		clearInterval(compTimer);
-		clearInterval(go);
+		clearInterval(userGo);
+		clearInterval(compGo);
 		$('.glyphicon').removeClass('glyphicon-spin');
   }
 
