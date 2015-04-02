@@ -8,16 +8,50 @@ $(document).ready(function(){
 	var compTimer;
 	var userGo;
 	var compGo;
-	var speed = 100;
+	var speedPerInterval = 10;
+	var userDistance = 0;
+	var compCar1 = 0;
+	var compCar2 = 0;
+	var compCar3 = 0;
 
 	var race = {
-		raceTrackLength: $('.track').width(),
+		raceTrackLength: 100,
 		secondsRemaining: 30,
 		vehicles: ["vehicle-1", "vehicle-2", "vehicle-3", "vehicle-4"],
-		moveUserCarForward: function() {$('#' + userChoice).animate({ "left": "+="+ speed +"px" }, "slow" );},
-		moveUserCarBackward: function() {$('#' + userChoice).animate({ "left": "-="+ speed +"px" }, "slow" );},
-		moveCompCarForward: function() {$('#' + compChoice).animate({ "left": "+="+ speed +"px" }, "slow" );},
-		moveCompCarBackward: function() {$('#' + compChoice).animate({ "left": "-="+ speed +"px" }, "slow" );}
+		moveUserCarForward: function() {
+
+			$('#' + userChoice).animate(
+				{ "left": "+=" + speedPerInterval + "%" }, "slow" );
+
+				userDistance += speedPerInterval;
+
+			},
+
+		moveUserCarBackward: function() {
+
+			$('#' + userChoice).animate(
+				{ "left": "+=" + speedPerInterval + "%" }, "slow" );},
+
+		moveCompCarForward: function() {
+
+			$('#' + compChoice).animate(
+ 				{ "left": "+=" + speedPerInterval + "%" }, "slow" );
+
+				if (compChoice === race.vehicles[0]) {
+					compCar1 += speedPerInterval;
+				}
+				else if (compChoice === race.vehicles[1]) {
+					compCar2 += speedPerInterval;
+				}
+				else if (compChoice === race.vehicles[2]) {
+					compCar3 += speedPerInterval;
+				}
+
+		},
+
+		moveCompCarBackward: function() {
+			$('#' + compChoice).animate(
+				{ "left": "+=" + speedPerInterval + "%" }, "slow" );}
 	}
 
 	function convertWidthToNumber(widthString) {
@@ -62,6 +96,7 @@ $(document).ready(function(){
 
 	function startTimer() {
 	
+		functionEverySecond();
 		timer = setInterval(functionEverySecond, 1000);
 		compTimer = setInterval(race.moveCompCarForward, 2000);
 		userGo = setInterval(whoHasFinished, 500);
@@ -100,24 +135,19 @@ $(document).ready(function(){
 
   function whoHasFinished() {
 
-  	var userCarPosition = $('#' + userChoice).position().left;
   	var finishLine = race.raceTrackLength;
-  	if(userCarPosition > finishLine) {
+  	if(userDistance >= finishLine) {
   		console.log("You win!");
   		checkeredFlag();
   		return true;
   	}
-  	else {
-	  	for (var i = 0; i < race.vehicles.length; i++) {
-		  	var compCarPosition = $('#'+ race.vehicles[i]).position().left;
-	  		if(compCarPosition > finishLine) {
-			  		console.log("You Lose!");
-			  		checkeredFlag();
-			  		return true;
-	  		}
-	  	}
-  	}
-  }
+  	else if (compCar1 >= finishLine || compCar2 >= finishLine || compCar3 >= finishLine) {
+			console.log("You Lose!");
+			checkeredFlag();
+	  	return true;
+		}
+
+	}
 
   function checkeredFlag() {
 		clearInterval(timer);
@@ -125,7 +155,7 @@ $(document).ready(function(){
 		clearInterval(userGo);
 		clearInterval(compGo);
 		$('.glyphicon').removeClass('glyphicon-spin');
-		$('#user-input').attr('disabled');
+		$('#user-input').attr('disabled', '');
 		$('#user-input').attr('placeholder', 'Game Over');
   }
 

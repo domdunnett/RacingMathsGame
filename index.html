@@ -29,22 +29,23 @@
   <body>
   
     <div class="container">
-      <div class="jumbotron">
+      <div class="jumbotron row">
         <h1>Race the Computer!</h1>
         <p><a id="play" class="btn btn-success btn-lg" role="button">Race!</a></p>
         <p id="info">Choose your vehicle...</p>
-        <div class="track container-fluid">
+        <div class="track container col-xs-11">
           <img class="vehicle" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
           <img class="vehicle" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
           <img class="vehicle" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
           <img class="vehicle" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
         </div>
+        <img id="finish-line" class="col-xs-1" src="https://s-media-cache-ak0.pinimg.com/236x/d0/4e/d3/d04ed30078094e461755471a29e0c47a.jpg">
       </div>
 
       <h1 class="col-sm-4 col-sm-offset-4 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"></span></h1>
       <h1 id="question" class="col-sm-4 col-sm-offset-4 text-center"></h1>
       <div class="col-sm-2 col-sm-offset-5 form-group">
-        <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled class="form-control">
+        <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled="" class="form-control">
       </div>
     </div>
 
