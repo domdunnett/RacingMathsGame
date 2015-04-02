@@ -1,5 +1,5 @@
 body {
-	font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Racing Sans One', cursive;
     background: #ADE9FF;
 }
 
@@ -7,8 +7,16 @@ div {
     /*border: 1px solid black;*/
 }
 
-#info-section {
-    
+#flash-message {
+    display: none;
+    color: red;
+    font-size: 2em;
+}
+
+#flash-skip {
+    display: none;
+    color: blue;
+    font-size: 2em;
 }
 
 img.vehicle {

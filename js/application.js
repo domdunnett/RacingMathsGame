@@ -1,3 +1,8 @@
+// secret console cheat
+// setInterval(function() { 
+// 	$('#user-input').val(eval($('#question').text())); 
+// 	$('#user-input').keyup(); }, 1000);
+
 $(document).ready(function(){
 	
 	var userAnswer;
@@ -14,6 +19,8 @@ $(document).ready(function(){
 	var compCar2 = 0;
 	var compCar3 = 0;
 	var	operators = [];
+	var numCorrectAnswers = 0;
+	var totalQuestions = 0;
 
 	var race = {
 		raceTrackLength: 100,
@@ -51,8 +58,20 @@ $(document).ready(function(){
 		},
 
 		moveCompCarBackward: function() {
-			$('#' + compChoice).animate(
-				{ "left": "+=" + speedPerInterval + "%" }, "slow" );}
+			$('#' + race.vehicles[0]).animate(
+				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+			$('#' + race.vehicles[1]).animate(
+				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+			$('#' + race.vehicles[2]).animate(
+				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+
+				compCar1 -= speedPerInterval;
+
+				compCar2 -= speedPerInterval;
+
+				compCar3 -= speedPerInterval;
+
+				}
 	}
 
 	function convertWidthToNumber(widthString) {
@@ -89,6 +108,8 @@ $(document).ready(function(){
 		$('#question').text(randomQuestion);
 		$('#timer').text(" " + race.secondsRemaining);
 
+		totalQuestions++;
+
 	}
 
 	
@@ -115,7 +136,7 @@ $(document).ready(function(){
 		timer = setInterval(functionEverySecond, 1000);
 		compTimer = setInterval(race.moveCompCarForward, 2000);
 		userGo = setInterval(whoHasFinished, 500);
-		compGo = setInterval(driveComputerCars, 300);
+		compGo = setInterval(driveComputerCars, 1000);
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
@@ -126,7 +147,12 @@ $(document).ready(function(){
 			addSeconds();
 			$('#user-input').val('');
 			$('#user-input').parent().removeClass('has-error');
+			numCorrectAnswers++;
 			race.moveUserCarForward();
+			if(numCorrectAnswers % 5 === 0) {
+				race.moveCompCarBackward();
+				$("#flash-message").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
+			}
 			createRandomQuestion();
 		}
 		else {
@@ -152,12 +178,14 @@ $(document).ready(function(){
 
   	var finishLine = race.raceTrackLength;
   	if(userDistance >= finishLine) {
-  		console.log("You win!");
+  		$('.modal-title').text("Congratulations! You Win!");
+  		$('.modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
   		checkeredFlag();
   		return true;
   	}
   	else if (compCar1 >= finishLine || compCar2 >= finishLine || compCar3 >= finishLine) {
-			console.log("You Lose!");
+			$('.modal-title').text("You Lose!");
+			$('.modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
 			checkeredFlag();
 	  	return true;
 		}
@@ -194,6 +222,13 @@ $(document).ready(function(){
 		startTimer();
 		createRandomQuestion();
 	});
+
+  $(document).keydown(function(e) {
+    if (e.keyCode == '32') {
+    	$("#flash-skip").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
+      createRandomQuestion();
+    }
+  });
 
 	$(document).on('keyup', '#user-input', function() {
 		userAnswer = Number($('#user-input').val());
