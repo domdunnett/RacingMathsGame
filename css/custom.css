@@ -20,12 +20,15 @@ img:hover {
 }
 
 #info {
-	font-size: 10px;
+	font-size: 20px;
 }
 
 .track {
     background: grey;
+    padding: none;
 }
+
+
 
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;

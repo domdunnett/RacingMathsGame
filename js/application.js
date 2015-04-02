@@ -6,16 +6,18 @@ $(document).ready(function(){
 	var compChoice;
 	var timer;
 	var compTimer;
-	var go;
-	
+	var userGo;
+	var compGo;
+	var speed = 100;
+
 	var race = {
 		raceTrackLength: $('.track').width(),
-		secondsRemaining: 15,
+		secondsRemaining: 30,
 		vehicles: ["vehicle-1", "vehicle-2", "vehicle-3", "vehicle-4"],
-		moveUserCarForward: function() {$('#' + userChoice).animate({ "left": "+=50px" }, "slow" );},
-		moveUserCarBackward: function() {$('#' + userChoice).animate({ "left": "-=50px" }, "slow" );},
-		moveCompCarForward: function() {$('#' + compChoice).animate({ "left": "+=50px" }, "slow" );},
-		moveCompCarBackward: function() {$('#' + compChoice).animate({ "left": "-=50px" }, "slow" );}
+		moveUserCarForward: function() {$('#' + userChoice).animate({ "left": "+="+ speed +"px" }, "slow" );},
+		moveUserCarBackward: function() {$('#' + userChoice).animate({ "left": "-="+ speed +"px" }, "slow" );},
+		moveCompCarForward: function() {$('#' + compChoice).animate({ "left": "+="+ speed +"px" }, "slow" );},
+		moveCompCarBackward: function() {$('#' + compChoice).animate({ "left": "-="+ speed +"px" }, "slow" );}
 	}
 
 	function convertWidthToNumber(widthString) {
@@ -97,22 +99,23 @@ $(document).ready(function(){
   }
 
   function whoHasFinished() {
-  	var userCarPosition = convertWidthToNumber($('#' + userChoice).css('left'))  - 50;
-  	var finishLine = race.raceTrackLength - 50;
-  	if(userCarPosition === finishLine) {
+
+  	var userCarPosition = $('#' + userChoice).position().left;
+  	var finishLine = race.raceTrackLength;
+  	if(userCarPosition > finishLine) {
   		console.log("You win!");
   		checkeredFlag();
   		return true;
   	}
   	else {
 	  	for (var i = 0; i < race.vehicles.length; i++) {
-	  		var compCarPosition = convertWidthToNumber($('#' + race.vehicles[i]).css('left'));
-	  		if(compCarPosition === finishLine) {
-		  		console.log("You Lose!");
-		  		checkeredFlag();
-		  		return true;
-		  	}
-	  	};	
+		  	var compCarPosition = $('#'+ race.vehicles[i]).position().left;
+	  		if(compCarPosition > finishLine) {
+			  		console.log("You Lose!");
+			  		checkeredFlag();
+			  		return true;
+	  		}
+	  	};
   	}
   }
 
@@ -122,6 +125,8 @@ $(document).ready(function(){
 		clearInterval(userGo);
 		clearInterval(compGo);
 		$('.glyphicon').removeClass('glyphicon-spin');
+		$('#user-input').attr('disabled');
+		$('#user-input').attr('placeholder', 'Game Over');
   }
 
 	$(document).one('click', '.vehicle', function() {
