@@ -23,36 +23,103 @@
     <link href="css/custom.css" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   
   </head>
   
   <body>
   
     <div class="container">
-      <div class="jumbotron">
+
+     <div class="row"> 
+
+      <div class="col-xs-12 col-sm-6 text-center">  
         <h1>Race the Computer!</h1>
-        <p><a id="play" class="btn btn-success btn-lg" role="button">Race!</a></p>
-        <p id="info">Choose your vehicle...</p>
-        <div class="track container-fluid">
-          <img class="vehicle" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
-          <img class="vehicle" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
-          <img class="vehicle" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
-          <img class="vehicle" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
+        <p><a id="play" class="col-xs-6 col-xs-offset-3 btn btn-success btn-lg" role="button">Race!</a></p>
+        <p id="info">Choose your vehicle. Test your Maths skills.</p>
+      </div>
+      <!-- end of top row left section -->
+
+      <div class="col-xs-12 col-md-6">
+        
+        <h1 id="question" class="col-xs-12 col-md-6 text-center">Maths Quiz</h1>
+
+        <h1 class="col-xs-12 col-md-6 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"></span></h1>
+
+
+        <div class="col-xs-12 col-md-6 text-center form-group">
+          <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled="" class="form-control">
         </div>
+
+
+        <div class="col-xs-12 col-md-6 text-center">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input class="operator-checkbox" type="checkbox" aria-label="Operator" operator-type="+" disabled>
+              +
+            </span>
+             <span class="input-group-addon">
+              <input class="operator-checkbox" type="checkbox" aria-label="Operator" operator-type="-" disabled>
+              -
+            </span>
+             <span class="input-group-addon">
+              <input class="operator-checkbox" type="checkbox" aria-label="Operator" operator-type="*" disabled>
+              *
+            </span>
+             <span class="input-group-addon">
+              <input class="operator-checkbox" type="checkbox" aria-label="Operator" operator-type="/" disabled>
+              /
+            </span>
+          </div>
+        </div>
+        <!-- end of checkboxes -->
+      </div>
+      <!-- end of top row right section -->
+    </div>
+    <!-- end of top row -->
+
+
+    <div class="track container col-xs-11">
+
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
       </div>
 
-      <h1 class="col-sm-4 col-sm-offset-4 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"></span></h1>
-      <h1 id="question" class="col-sm-4 col-sm-offset-4 text-center"></h1>
-      <div class="col-sm-2 col-sm-offset-5 form-group">
-        <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled class="form-control">
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
+      </div>
+
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
+      </div>
+
+      <img class="vehicle animated pulse infinite" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
+
+    </div>
+
+    <img id="finish-line" class="col-xs-1" src="https://s-media-cache-ak0.pinimg.com/236x/d0/4e/d3/d04ed30078094e461755471a29e0c47a.jpg">
+
+    <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="mySmallModalLabel">Finished!<a class="anchorjs-link" href="#mySmallModalLabel"><span class="anchorjs-icon"></span></a></h4>
+        </div>
+        <div class="modal-content">
+          ...
+        </div>
       </div>
     </div>
+
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/application.js"></script>
-  
+
   </body>
 
 </html>
