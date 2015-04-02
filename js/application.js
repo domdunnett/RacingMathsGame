@@ -36,7 +36,7 @@ $(document).ready(function(){
 		number2 = Math.ceil(Math.random()*10);
 
 		randomQuestion = number1 + " + " + number2;
-		randomAnswer = eval(randomQuestion)
+		randomAnswer = eval(randomQuestion);
 
 		$('#question').text(randomQuestion);
 		$('#timer').text(" " + race.secondsRemaining);
@@ -65,7 +65,7 @@ $(document).ready(function(){
 		timer = setInterval(functionEverySecond, 1000);
 		compTimer = setInterval(race.moveCompCarForward, 2000);
 		userGo = setInterval(whoHasFinished, 500);
-		compGo = setInterval(driveComputerCars, 300)
+		compGo = setInterval(driveComputerCars, 300);
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
@@ -115,7 +115,7 @@ $(document).ready(function(){
 			  		checkeredFlag();
 			  		return true;
 	  		}
-	  	};
+	  	}
   	}
   }
 
@@ -150,7 +150,7 @@ $(document).ready(function(){
 
 	$(document).on('keyup', '#user-input', function() {
 		userAnswer = Number($('#user-input').val());
-		answer = eval($('#question').text());
+		var answer = eval($('#question').text());
 		isAnswerCorrect(userAnswer, answer);
 	});
 
