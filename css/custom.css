@@ -41,6 +41,12 @@ img.selected {
 	font-size: 20px;
 }
 
+@media (max-width: 600px) {
+  #info {
+    display: none;
+  }
+}
+
 /*Race Track*/
 .track {
     background: grey;
