@@ -6,7 +6,6 @@
 $(document).ready(function(){
 	
 	var userAnswer;
-	var randomAnswer;
 	var userChoice;
 	var compChoice;
 	var timer;
@@ -23,6 +22,7 @@ $(document).ready(function(){
 	var totalQuestions = 0;
 
 	var race = {
+
 		raceTrackLength: 100,
 		secondsRemaining: 30,
 		vehicles: ["vehicle-1", "vehicle-2", "vehicle-3", "vehicle-4"],
@@ -53,7 +53,7 @@ $(document).ready(function(){
 				}
 				else if (compChoice === race.vehicles[2]) {
 					compCar3 += speedPerInterval;
-				}
+				};
 
 				$('#' + race.vehicles[0]).removeClass('animated shake');
 				$('#' + race.vehicles[1]).removeClass('animated shake');
@@ -83,15 +83,12 @@ $(document).ready(function(){
 
 				compCar3 -= speedPerInterval;
 
-				}
-	}
+		}
 
-	function convertWidthToNumber(widthString) {
-			var converted = widthString.substr(0, widthString.length-2);
-			return Number(converted);
-	}
+	};
 
 	function whichOperators() {
+
 		var checkboxes = $('.operator-checkbox');
 		for (var i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop('checked')) {
@@ -99,11 +96,13 @@ $(document).ready(function(){
 				operators.push(attr);
 			}
 		}
+
 	}
 
 	function createRandomQuestion() {
 		
 		var randomQuestion;
+		var randomAnswer;
 		var number1;
 		var number2;
 		var randomOperator;
@@ -115,6 +114,7 @@ $(document).ready(function(){
 		randomOperator = operators[Math.floor(Math.random()*operators.length)];
 
 		randomQuestion = number1 + " " + randomOperator + " " + number2;
+
 		randomAnswer = eval(randomQuestion);
 
 		$('#question').text(randomQuestion);
@@ -124,13 +124,14 @@ $(document).ready(function(){
 
 	}
 
-	
 	function selectVehicles(userChoice) {
+
 		for (var i = 0; i < race.vehicles.length; i++) {
 			if (race.vehicles[i] === userChoice) {
 				race.vehicles.splice(i,1);
 			}
-		};
+		}
+		
 	}
 	
 	function driveComputerCars() {
@@ -139,7 +140,6 @@ $(document).ready(function(){
 		race.moveCompCarForward();
 
 	}
-
 
 	function startTimer() {
 	
@@ -153,8 +153,8 @@ $(document).ready(function(){
 		
 	}
 
-
 	function isAnswerCorrect(userAnswer, answer) {
+
 		if (userAnswer === answer) {
 			addSeconds();
 			$('#user-input').val('');
@@ -170,13 +170,17 @@ $(document).ready(function(){
 		else {
 			$('#user-input').parent().addClass('has-error');
 		}
+
 	}
 
   function addSeconds() {
+
     race.secondsRemaining += 2;
+
   }
 
   function functionEverySecond() {
+
     if (race.secondsRemaining < 0) {
       clearInterval(timer);
       checkeredFlag();
@@ -184,6 +188,7 @@ $(document).ready(function(){
       $('#timer').text(race.secondsRemaining);
       race.secondsRemaining--;
     }
+
   }
 
   function whoHasFinished() {
@@ -205,6 +210,7 @@ $(document).ready(function(){
 	}
 
   function checkeredFlag() {
+
 		clearInterval(timer);
 		clearInterval(compTimer);
 		clearInterval(userGo);
@@ -213,47 +219,70 @@ $(document).ready(function(){
 		$('#user-input').attr('disabled', '');
 		$('#user-input').attr('placeholder', 'Game Over');
 		$('#modal').modal();
+
   }
-  
+
+
+// choose vehicle event
 	$(document).one('click', '.vehicle', function() {
+
 	  userChoice = $(this).attr('id');
 	  $(this).addClass('selected animated rubberBand');
 	  $('.vehicle').removeClass('pulse infinite');
 	  selectVehicles(userChoice);
 	  $('.operator-checkbox').removeAttr('disabled');
+
 	});
 
+// On clicking Race!, remove disabled inputs
 	$('#play').click(function() {
+
 		$('#user-input').attr('id', 'user-input');
 		$('#user-input').removeAttr('disabled');
 		$('#user-input').removeAttr('placeholder');
 		$('#user-input').focus();
+
 	});
 
+// On focusing on input, start timer
 	$(document).one('focus', '#user-input', function() {
+
 		startTimer();
 		createRandomQuestion();
+
 	});
 
+// Press Spacebar to skip
   $('#user-input').keydown(function(e) {
+
     if (e.keyCode == '32') {
     	$("#flash-skip").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
       createRandomQuestion();
     }
+
   });
 
+// When user types answer, check if it's right
 	$(document).on('keyup', '#user-input', function() {
+
 		userAnswer = Number($('#user-input').val());
 		var answer = eval($('#question').text());
 		isAnswerCorrect(userAnswer, answer);
-	});
-	
-	$('#reset').click(function(){
-		location.reload();
+
 	});
 
+// Reset button refreshes page after finish
+	$('#reset').click(function(){
+
+		location.reload();
+
+	});
+
+// Click info sign, rules show
 	$('#info-sign').click(function() {
+
 		$('#infoModal').modal();
+
 	});
 
 });

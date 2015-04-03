@@ -4,29 +4,29 @@
   <head>
     
     <title>Racing Mathematics</title>
+
     <link rel="shortcut icon" href="/favicon-calculator.png">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="keywords" content="WDI, GA, jQuery, Javascript, HTML, CSS, Racing, Math, Maths, Quiz, Cars">
+    <meta name="description" content="Mathematics Racing Game designed using jQuery and Bootstrap">
+    <meta name="author" content="Dom Dunnett">
 
-        <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
+    <!-- daneden.github.io/animate.css/ -->
     <link rel="stylesheet" href="css/animate.css">
 
     <link href="css/custom.css" rel="stylesheet">
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-
+    <!-- Google Font - Racing -->
     <link href='http://fonts.googleapis.com/css?family=Racing+Sans+One' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   
   </head>
   
@@ -36,6 +36,7 @@
 
      <div class="row"> 
 
+      <!-- Top left Title Section -->
       <div class="col-xs-12 col-md-6 text-center">  
         <h1>Race the Computer!</h1>
         <p><a id="play" class="col-xs-6 col-xs-offset-3 btn btn-success btn-lg" role="button">Race!</a></p>
@@ -51,7 +52,7 @@
 
         <h1 class="col-xs-12 col-md-6 text-center"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span><span id="timer"></span></h1>
 
-
+        <!-- Flash messages -->
         <div class="col-xs-12 col-md-6 text-center form-group">
           <input id="user-input" type="text" placeholder="Click Race! to Start..." disabled="" class="form-control">
           <div id="flash-message">BOOST!!</div>
@@ -80,8 +81,11 @@
           </div>
         </div>
         <!-- end of checkboxes -->
+
+
       </div>
-      <!-- end of top row right section -->
+      <!-- end of Question, Input, Timer -->
+    
     </div>
     <!-- end of top row -->
 
@@ -104,6 +108,7 @@
 
     </div>
 
+    <!-- Finish Line -->
     <img id="finish-line" class="col-xs-1" src="https://s-media-cache-ak0.pinimg.com/236x/d0/4e/d3/d04ed30078094e461755471a29e0c47a.jpg">
 
     <!-- Finishing Modal -->
@@ -144,12 +149,12 @@
       </div>
     </div>
 
+    <!-- Footer and Info Icon -->
     <footer><a id="info-sign" data-animation="true" title="Rules of the Game"><span class="glyphicon glyphicon-info-sign"></span></a> Racing Mathematics by Dom Dunnett</footer>
 
       
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/application.js"></script>

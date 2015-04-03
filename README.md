@@ -1,5 +1,5 @@
-Javascript Front End GA Design Project - Racing Math Game
 Dominic Dunnett
+Javascript Front End GA Design Project - Racing Math Game
 =============================
 
 Note:
