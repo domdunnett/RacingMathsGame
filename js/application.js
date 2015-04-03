@@ -197,7 +197,7 @@ $(document).ready(function(){
   	}
   	else if (compCar1 >= finishLine || compCar2 >= finishLine || compCar3 >= finishLine) {
 			$('.modal-title').text("You Lose!");
-			$('.modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
+			$('.finish-modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
 			checkeredFlag();
 	  	return true;
 		}
@@ -214,7 +214,7 @@ $(document).ready(function(){
 		$('#user-input').attr('placeholder', 'Game Over');
 		$('#modal').modal();
   }
-
+  
 	$(document).one('click', '.vehicle', function() {
 	  userChoice = $(this).attr('id');
 	  $(this).addClass('selected animated rubberBand');
@@ -235,7 +235,7 @@ $(document).ready(function(){
 		createRandomQuestion();
 	});
 
-  $(document).keydown(function(e) {
+  $('#user-input').keydown(function(e) {
     if (e.keyCode == '32') {
     	$("#flash-skip").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
       createRandomQuestion();
@@ -251,5 +251,9 @@ $(document).ready(function(){
 	$('#reset').click(function(){
 		location.reload();
 	});
-	
+
+	$('#info-sign').click(function() {
+		$('#infoModal').modal();
+	});
+
 });
