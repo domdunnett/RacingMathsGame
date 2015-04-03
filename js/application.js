@@ -131,7 +131,7 @@ $(document).ready(function(){
 				race.vehicles.splice(i,1);
 			}
 		}
-		
+
 	}
 	
 	function driveComputerCars() {
@@ -196,7 +196,7 @@ $(document).ready(function(){
   	var finishLine = race.raceTrackLength;
   	if(userDistance >= finishLine) {
   		$('.modal-title').text("Congratulations! You Win!");
-  		$('.modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
+  		$('.finish-modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
   		checkeredFlag();
   		return true;
   	}
