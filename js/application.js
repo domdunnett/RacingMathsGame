@@ -55,15 +55,27 @@ $(document).ready(function(){
 					compCar3 += speedPerInterval;
 				}
 
+				$('#' + race.vehicles[0]).removeClass('animated shake');
+				$('#' + race.vehicles[1]).removeClass('animated shake');
+				$('#' + race.vehicles[2]).removeClass('animated shake');
 		},
 
 		moveCompCarBackward: function() {
+
 			$('#' + race.vehicles[0]).animate(
 				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+
+			$('#' + race.vehicles[0]).addClass('animated shake');
+
 			$('#' + race.vehicles[1]).animate(
 				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+
+			$('#' + race.vehicles[1]).addClass('animated shake');
+
 			$('#' + race.vehicles[2]).animate(
 				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+
+			$('#' + race.vehicles[2]).addClass('animated shake');
 
 				compCar1 -= speedPerInterval;
 
