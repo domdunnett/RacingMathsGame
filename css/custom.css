@@ -68,6 +68,12 @@ img.selected {
     border-radius: 6px;
 }
 
+.modal-content {
+    box-shadow: none;
+    border: none;
+    padding-bottom: 1em;
+}
+
 
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;

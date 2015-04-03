@@ -248,4 +248,8 @@ $(document).ready(function(){
 		isAnswerCorrect(userAnswer, answer);
 	});
 	
+	$('#reset').click(function(){
+		location.reload();
+	});
+	
 });
