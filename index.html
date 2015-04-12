@@ -34,6 +34,42 @@
   
     <div class="container">
 
+    <!-- race track and cars -->
+    <div class="track container col-xs-11">
+
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
+      </div>
+
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
+      </div>
+
+      <div class="lane">
+        <img class="vehicle animated pulse infinite" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
+      </div>
+
+      <img class="vehicle animated pulse infinite" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
+
+    </div>
+
+    <!-- Finish Line -->
+    <img id="finish-line" class="col-xs-1" src="https://s-media-cache-ak0.pinimg.com/236x/d0/4e/d3/d04ed30078094e461755471a29e0c47a.jpg">
+
+    <!-- Finishing Modal -->
+    <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-sm">
+        
+        <div class="finish-modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h2 class="modal-title text-center" id="mySmallModalLabel">Finished!<a class="anchorjs-link" href="#mySmallModalLabel"><span class="anchorjs-icon"></span></a></h2>
+          <div class="finish-modal-content text-center"></div>
+          <button type="button" id="reset" class="btn btn-primary">Reset</button>
+        </div>
+
+      </div>
+    </div>
+
      <div class="row"> 
 
       <!-- Top left Title Section -->
@@ -89,41 +125,6 @@
     </div>
     <!-- end of top row -->
 
-    <!-- race track and cars -->
-    <div class="track container col-xs-11">
-
-      <div class="lane">
-        <img class="vehicle animated pulse infinite" id="vehicle-1" src="https://openclipart.org/image/800px/svg_to_png/61201/simple-travel-car-top-view.png">
-      </div>
-
-      <div class="lane">
-        <img class="vehicle animated pulse infinite" id="vehicle-2" src="http://publicdomainvectors.org/photos/SimpleGreenCarTopView.png">
-      </div>
-
-      <div class="lane">
-        <img class="vehicle animated pulse infinite" id="vehicle-3" src="https://openclipart.org/image/2400px/svg_to_png/190171/SimpleYellowCarTopView.png">
-      </div>
-
-      <img class="vehicle animated pulse infinite" id="vehicle-4" src="https://openclipart.org/image/800px/svg_to_png/190172/SimpleTurquoiseCarTopView.png">
-
-    </div>
-
-    <!-- Finish Line -->
-    <img id="finish-line" class="col-xs-1" src="https://s-media-cache-ak0.pinimg.com/236x/d0/4e/d3/d04ed30078094e461755471a29e0c47a.jpg">
-
-    <!-- Finishing Modal -->
-    <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-       <div class="modal-dialog modal-sm">
-        
-        <div class="finish-modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-          <h2 class="modal-title text-center" id="mySmallModalLabel">Finished!<a class="anchorjs-link" href="#mySmallModalLabel"><span class="anchorjs-icon"></span></a></h2>
-          <div class="finish-modal-content text-center"></div>
-          <button type="button" id="reset" class="btn btn-primary">Reset</button>
-        </div>
-
-      </div>
-    </div>
 
     <!-- Info Modal -->
     <div class="modal fade" id="infoModal" tabindex="-1" role="information" aria-labelledby="Information" aria-hidden="true">

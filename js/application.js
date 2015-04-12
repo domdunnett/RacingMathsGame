@@ -29,7 +29,7 @@ $(document).ready(function(){
 		moveUserCarForward: function() {
 
 			$('#' + userChoice).animate(
-				{ "left": "+=" + speedPerInterval + "%" }, "slow" );
+				{ "left": "+=" + randomSpeedGenerator() + "%" }, "slow" );
 
 				userDistance += speedPerInterval;
 
@@ -41,18 +41,19 @@ $(document).ready(function(){
 				{ "left": "+=" + speedPerInterval + "%" }, "slow" );},
 
 		moveCompCarForward: function() {
-
+			var speed = randomSpeedGenerator()
+			
 			$('#' + compChoice).animate(
- 				{ "left": "+=" + speedPerInterval + "%" }, "slow" );
+ 				{ "left": "+=" + speed + "%" }, "slow" );
 
 				if (compChoice === race.vehicles[0]) {
-					compCar1 += speedPerInterval;
+					compCar1 += speed;
 				}
 				else if (compChoice === race.vehicles[1]) {
-					compCar2 += speedPerInterval;
+					compCar2 += speed;
 				}
 				else if (compChoice === race.vehicles[2]) {
-					compCar3 += speedPerInterval;
+					compCar3 += speed;
 				};
 
 				$('#' + race.vehicles[0]).removeClass('animated shake');
@@ -87,6 +88,11 @@ $(document).ready(function(){
 
 	};
 
+	function randomSpeedGenerator() {
+		speedPerInterval = Math.floor(Math.random()*10);
+		return speedPerInterval;
+	}
+
 	function whichOperators() {
 
 		var checkboxes = $('.operator-checkbox');
@@ -102,20 +108,24 @@ $(document).ready(function(){
 	function createRandomQuestion() {
 		
 		var randomQuestion;
-		var randomAnswer;
+		var randomAnswer = 0;
 		var number1;
 		var number2;
 		var randomOperator;
 
-		number1 = Math.ceil(Math.random()*10);
-		
-		number2 = Math.ceil(Math.random()*10);
+		while (randomAnswer <= 0 || randomAnswer % 1 !== 0) {
+			number1 = Math.ceil(Math.random()*10);
 
-		randomOperator = operators[Math.floor(Math.random()*operators.length)];
+			number2 = Math.ceil(Math.random()*10);
 
-		randomQuestion = number1 + " " + randomOperator + " " + number2;
+			randomOperator = operators[Math.floor(Math.random()*operators.length)];
 
-		randomAnswer = eval(randomQuestion);
+			randomQuestion = number1 + " " + randomOperator + " " + number2;
+
+			randomAnswer = eval(randomQuestion);
+		}
+
+			
 
 		$('#question').text(randomQuestion);
 		$('#timer').text(" " + race.secondsRemaining);
@@ -148,7 +158,7 @@ $(document).ready(function(){
 		timer = setInterval(functionEverySecond, 1000);
 		compTimer = setInterval(race.moveCompCarForward, 2000);
 		userGo = setInterval(whoHasFinished, 500);
-		compGo = setInterval(driveComputerCars, 1000);
+		compGo = setInterval(driveComputerCars, 500);
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
