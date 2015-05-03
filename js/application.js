@@ -1,25 +1,21 @@
-// secret console cheat
-// setInterval(function() { 
-// 	$('#user-input').val(eval($('#question').text())); 
-// 	$('#user-input').keyup(); }, 1000);
-
 $(document).ready(function(){
 	
-	var userAnswer;
-	var userChoice;
-	var compChoice;
-	var timer;
-	var compTimer;
-	var userGo;
-	var compGo;
-	var speedPerInterval = 5;
-	var userDistance = 0;
-	var compCar1 = 0;
-	var compCar2 = 0;
-	var compCar3 = 0;
-	var	operators = [];
-	var numCorrectAnswers = 0;
-	var totalQuestions = 0;
+	var userChoice; 							// --> User's Car
+	var compChoice; 							// --> Random Current Comp Car
+	var timer; 										// --> Timer function Interval
+	var checkFinished; 						// --> hasFinished function Interval
+	var compGo; 									// --> Dive Comp Cars Interval
+	var currentDistance; 					// --> User's current random distance generated
+	var distanceTravelled = 5; 		// --> Generic Number to move Comp Cars Back
+	var userDistance = 0; 				// --> Users distance down track
+	var compCar1Distance = 0; 		// --> Comp Car 1's Distance down the track
+	var compCar2Distance = 0; 		// --> Comp Car 2's Distance down the track
+	var compCar3Distance = 0; 		// --> Comp Car 3's Distance down the track
+	var	operators = []; 					// --> The operators to be chosen by user
+	var numCorrectAnswers = 0; 		// --> User's correct answer counter
+	var totalQuestions = 0; 			// --> Total questions generated
+	
+// ---------------------------------------------------------------------------- Race General Settings
 
 	var race = {
 
@@ -28,32 +24,34 @@ $(document).ready(function(){
 		vehicles: ["vehicle-1", "vehicle-2", "vehicle-3", "vehicle-4"],
 		moveUserCarForward: function() {
 
-			$('#' + userChoice).animate(
-				{ "left": "+=" + randomSpeedGenerator() + "%" }, "slow" );
+			currentDistance = randomDistanceGenerator();
 
-				userDistance += speedPerInterval;
+			$('#' + userChoice).animate({ "left": "+=" + currentDistance + "%" }, "slow" );
 
+			userDistance += currentDistance;
+			
 			},
 
 		moveUserCarBackward: function() {
 
 			$('#' + userChoice).animate(
-				{ "left": "+=" + speedPerInterval + "%" }, "slow" );},
+				{ "left": "+=" + distanceTravelled + "%" }, "slow" );},
 
 		moveCompCarForward: function() {
-			var speed = randomSpeedGenerator()
+			
+			var distance = randomDistanceGenerator()
 			
 			$('#' + compChoice).animate(
- 				{ "left": "+=" + speed + "%" }, "slow" );
+ 				{ "left": "+=" + distance + "%" }, "slow" );
 
 				if (compChoice === race.vehicles[0]) {
-					compCar1 += speed;
+					compCar1Distance += distance;
 				}
 				else if (compChoice === race.vehicles[1]) {
-					compCar2 += speed;
+					compCar2Distance += distance;
 				}
 				else if (compChoice === race.vehicles[2]) {
-					compCar3 += speed;
+					compCar3Distance += distance;
 				};
 
 				$('#' + race.vehicles[0]).removeClass('animated shake');
@@ -64,34 +62,41 @@ $(document).ready(function(){
 		moveCompCarBackward: function() {
 
 			$('#' + race.vehicles[0]).animate(
-				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+				{ "left": "-=" + distanceTravelled + "%" }, "slow" );
 
 			$('#' + race.vehicles[0]).addClass('animated shake');
 
 			$('#' + race.vehicles[1]).animate(
-				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+				{ "left": "-=" + distanceTravelled + "%" }, "slow" );
 
 			$('#' + race.vehicles[1]).addClass('animated shake');
 
 			$('#' + race.vehicles[2]).animate(
-				{ "left": "-=" + speedPerInterval + "%" }, "slow" );
+				{ "left": "-=" + distanceTravelled + "%" }, "slow" );
 
 			$('#' + race.vehicles[2]).addClass('animated shake');
 
-				compCar1 -= speedPerInterval;
+				compCar1Distance -= distanceTravelled;
 
-				compCar2 -= speedPerInterval;
+				compCar2Distance -= distanceTravelled;
 
-				compCar3 -= speedPerInterval;
+				compCar3Distance -= distanceTravelled;
 
 		}
 
 	};
 
-	function randomSpeedGenerator() {
-		speedPerInterval = Math.floor(Math.random()*10);
-		return speedPerInterval;
+	
+// ----------------------------------------------------------------------------	Generate a random car speed between 1 and 10
+	
+	function randomDistanceGenerator() {
+		
+		distanceTravelled = Math.floor(Math.random()*10);
+		return distanceTravelled;
+		
 	}
+
+// ---------------------------------------------------------------------------- Assign chosen maths operators to Array
 
 	function whichOperators() {
 
@@ -104,6 +109,8 @@ $(document).ready(function(){
 		}
 
 	}
+	
+// ---------------------------------------------------------------------------- Generate a random question
 
 	function createRandomQuestion() {
 		
@@ -133,6 +140,8 @@ $(document).ready(function(){
 		totalQuestions++;
 
 	}
+	
+// ---------------------------------------------------------------------------- Remove User Choice from Comp Cars Array
 
 	function selectVehicles(userChoice) {
 
@@ -144,24 +153,29 @@ $(document).ready(function(){
 
 	}
 	
+// ---------------------------------------------------------------------------- Move random Comp Car forward
+	
 	function driveComputerCars() {
 	
 		compChoice = race.vehicles[Math.floor(Math.random()*race.vehicles.length)];
 		race.moveCompCarForward();
 
 	}
+	
+// ---------------------------------------------------------------------------- Start the timer, drive comp cars
 
 	function startTimer() {
 	
-		functionEverySecond();
+		beginTimer();
 		whichOperators();
-		timer = setInterval(functionEverySecond, 1000);
-		compTimer = setInterval(race.moveCompCarForward, 2000);
-		userGo = setInterval(whoHasFinished, 500);
+		timer = setInterval(beginTimer, 1000);
+		checkFinished = setInterval(hasFinished, 1000);
 		compGo = setInterval(driveComputerCars, 500);
 		$('.glyphicon').addClass('glyphicon-spin');
 		
 	}
+	
+// ---------------------------------------------------------------------------- Check if correct user answer
 
 	function isAnswerCorrect(userAnswer, answer) {
 
@@ -182,6 +196,8 @@ $(document).ready(function(){
 		}
 
 	}
+	
+// ---------------------------------------------------------------------------- Add two secs to Timer for correct answer
 
   function addSeconds() {
 
@@ -189,7 +205,9 @@ $(document).ready(function(){
 
   }
 
-  function functionEverySecond() {
+// ---------------------------------------------------------------------------- Display timer and check if timer has expired
+	
+  function beginTimer() {
 
     if (race.secondsRemaining < 0) {
       clearInterval(timer);
@@ -200,30 +218,31 @@ $(document).ready(function(){
     }
 
   }
+	
+// ---------------------------------------------------------------------------- Check if any car has crossed Finish Line
 
-  function whoHasFinished() {
+  function hasFinished() {
 
   	var finishLine = race.raceTrackLength;
   	if(userDistance >= finishLine) {
   		$('.modal-title').text("Congratulations! You Win!");
   		$('.finish-modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
   		checkeredFlag();
-  		return true;
   	}
-  	else if (compCar1 >= finishLine || compCar2 >= finishLine || compCar3 >= finishLine) {
+  	else if (compCar1Distance >= finishLine || compCar2Distance >= finishLine || compCar3Distance >= finishLine) {
 			$('.modal-title').text("You Lose!");
 			$('.finish-modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
 			checkeredFlag();
-	  	return true;
 		}
 
 	}
+	
+// ---------------------------------------------------------------------------- Finish the Race
 
   function checkeredFlag() {
 
 		clearInterval(timer);
-		clearInterval(compTimer);
-		clearInterval(userGo);
+		clearInterval(checkFinished);
 		clearInterval(compGo);
 		$('.glyphicon').removeClass('glyphicon-spin');
 		$('#user-input').attr('disabled', '');
@@ -232,8 +251,8 @@ $(document).ready(function(){
 
   }
 
-
-// choose vehicle event
+// ---------------------------------------------------------------------------- User Chooses Vehicle
+	
 	$(document).one('click', '.vehicle', function() {
 
 	  userChoice = $(this).attr('id');
@@ -244,25 +263,21 @@ $(document).ready(function(){
 
 	});
 
-// On clicking Race!, remove disabled inputs
+// ---------------------------------------------------------------------------- On click Race!
+	
 	$('#play').click(function() {
 
 		$('#user-input').attr('id', 'user-input');
 		$('#user-input').removeAttr('disabled');
 		$('#user-input').removeAttr('placeholder');
 		$('#user-input').focus();
-
-	});
-
-// On focusing on input, start timer
-	$(document).one('focus', '#user-input', function() {
-
 		startTimer();
 		createRandomQuestion();
 
 	});
 
-// Press Spacebar to skip
+// ---------------------------------------------------------------------------- Press Spacebar to skip
+	
   $('#user-input').keydown(function(e) {
 
     if (e.keyCode == '32') {
@@ -272,23 +287,26 @@ $(document).ready(function(){
 
   });
 
-// When user types answer, check if it's right
+// ---------------------------------------------------------------------------- On Keyup, Check Answer
+	
 	$(document).on('keyup', '#user-input', function() {
 
-		userAnswer = Number($('#user-input').val());
+		var userAnswer = Number($('#user-input').val());
 		var answer = eval($('#question').text());
 		isAnswerCorrect(userAnswer, answer);
 
 	});
 
-// Reset button refreshes page after finish
+// ---------------------------------------------------------------------------- Reset button refreshes page after finish
+	
 	$('#reset').click(function(){
 
 		location.reload();
 
 	});
 
-// Click info sign, rules show
+// ---------------------------------------------------------------------------- Click info sign, rules show
+	
 	$('#info-sign').click(function() {
 
 		$('#infoModal').modal();
@@ -296,3 +314,9 @@ $(document).ready(function(){
 	});
 
 });
+
+// ---------------------------------------------------------------------------- Chrome Console Hack
+
+// setInterval(function() { 
+// 	$('#user-input').val(eval($('#question').text())); 
+// 	$('#user-input').keyup(); }, 1000);
