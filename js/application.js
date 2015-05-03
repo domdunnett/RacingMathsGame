@@ -101,6 +101,7 @@ $(document).ready(function(){
 	function whichOperators() {
 
 		var checkboxes = $('.operator-checkbox');
+		
 		for (var i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop('checked')) {
 				var attr = $(checkboxes[i]).attr('operator-type');
@@ -131,8 +132,6 @@ $(document).ready(function(){
 
 			randomAnswer = eval(randomQuestion);
 		}
-
-			
 
 		$('#question').text(randomQuestion);
 		$('#timer').text(" " + race.secondsRemaining);
@@ -224,6 +223,7 @@ $(document).ready(function(){
   function hasFinished() {
 
   	var finishLine = race.raceTrackLength;
+		
   	if(userDistance >= finishLine) {
   		$('.modal-title').text("Congratulations! You Win!");
   		$('.finish-modal-content').text("You scored " + numCorrectAnswers + " out of " + totalQuestions);
@@ -259,10 +259,21 @@ $(document).ready(function(){
 	  $(this).addClass('selected animated rubberBand');
 	  $('.vehicle').removeClass('pulse infinite');
 	  selectVehicles(userChoice);
+		$('#main-title').hide('slow');
+		$('#question-input').show('slow');
 	  $('.operator-checkbox').removeAttr('disabled');
 
 	});
 
+
+// ---------------------------------------------------------------------------- User Chooses Operators
+	
+	$(document).one('click', '#checkboxes', function() {
+		
+		$('#play').show('slow');
+		
+	});
+	
 // ---------------------------------------------------------------------------- On click Race!
 	
 	$('#play').click(function() {
@@ -270,6 +281,7 @@ $(document).ready(function(){
 		$('#user-input').attr('id', 'user-input');
 		$('#user-input').removeAttr('disabled');
 		$('#user-input').removeAttr('placeholder');
+		$('#play').hide('slow');
 		$('#user-input').focus();
 		startTimer();
 		createRandomQuestion();

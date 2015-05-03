@@ -3,7 +3,21 @@ body {
     background: #ADE9FF;
 }
 
-/*Race Flash messages*/
+/* ------------- Race Button ------------- */
+
+#play {
+	display: none;
+	margin-top: 1em;
+}
+
+/* ------------- Question Box ------------- */
+
+#question-input {
+	display: none;
+}
+
+/* ------------- Race Flash messages ------------- */
+
 #flash-message {
     display: none;
     color: red;
@@ -16,16 +30,16 @@ body {
     font-size: 2em;
 }
 
+/* ------------- Cars ------------- */
 
-/*Cars*/
 img.vehicle {
 	width: 50px;
 	height: 50px;
 	display: block;
 	position: relative;
 	opacity: 0.5;
-    left: 0px;
-    z-index: 1
+  left: 0px;
+  z-index: 1;
 }
 
 img:hover {
@@ -36,7 +50,8 @@ img.selected {
     opacity: 1;
 }
 
-/*Info Paragraph*/
+/* ------------- Info Paragraph ------------- */
+
 #info {
 	font-size: 20px;
 }
@@ -47,7 +62,8 @@ img.selected {
   }
 }
 
-/*Race Track*/
+/* ------------- Race Track ------------- */
+
 .track {
     background: grey;
     padding: 0;
@@ -69,7 +85,8 @@ img.selected {
     border-bottom: 2px dashed white;
 }
 
-/*Finishing Modals*/
+/* ------------- Finishing Modals ------------- */
+
 .finish-modal-header {
     background-color: white;
     color: black;
@@ -85,7 +102,8 @@ img.selected {
     background-color: white;
 }
 
-/*Info Modal*/
+/* ------------- Info Modal ------------- */
+
 .modal-header {
     background-color: #5cb85c;
     color: white;
@@ -101,7 +119,8 @@ img.selected {
     background-color: white;
 }
 
-/*Information Icon*/
+/* ------------- Information Icon ------------- */
+
 #info-sign {
     font-size: 1.5em;
 }
@@ -111,7 +130,8 @@ footer {
     bottom: 0px;
 }
 
-/*Spinning Hourglass*/
+/* ------------- Spinning Hourglass ------------- */
+
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
